@@ -57,19 +57,39 @@ if (config.tweetEod) {
   const solutions = await tweetedSolutions(day);
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')));
-  const excitement = i => {
-    if (i === 1) return '! WOW!'
-    if (i < solution.length) return '!!';
-    if (i === solution.length) return '!';
-    return '';
-  }
-  let status = [
-    `Of the last 100 tweeted Wordle ${day}:`,
-    ...solutions.map(({ count, steps }) => (
-      `${count} solved it in ${steps}${excitement(steps)}`
-    )).filter(a => a),
+  const fwSpace = '￣';
+  const fwDigits = '０１２３４５６７８９'.split('');
+  const gridLine = Array(7).join('⬛').split('');
+  const grid = Array(6).join('.').split('.').map(() => gridLine.slice());
+  const max = solutions.reduce((max, { count }) => Math.max(max, count), 0);
+  const counts = Array(6).join('.').split('.').map((_, i) => {
+    const n = i === 0 ? 1 : Math.ceil((max**(1/6))**(i + 1));
+    const t = Math.floor(n / 10);
+    const o = n % 10;
+    return (t === 0 ? fwSpace : fwDigits[t]) + fwDigits[o];
+  }).reverse();
+  solutions.forEach(({ count, steps }) => {
+    const x = steps - 1;
+    for (let y = 0; y < 6; y++) {
+      const i = 5 - y;
+      const b = i === 0 ? 0 : i === 1 ? 1 : Math.ceil((max**(1/6))**(i));
+      const t = i === 0 ? 1 : Math.ceil((max**(1/6))**(i + 1));
+      if (count >= t) {
+        grid[y][x] = '🟩';
+      } else if (count > b) {
+        grid[y][x] = '🟨';
+      }
+    }
+  });
+
+  const status = [
+    `Stats for the last 100 tweets for Wordle ${day}:`,
+    ...grid.map((line, n) => (
+     counts[n] + line.join('')
+    )),
+    '￣￣' + `1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣`,
     `WordleBot solved it in ${solution.length}`,
-    WORDLE_POSTSCRIPT,
+    `If you beat the bot, you're doing great!`
   ].join('\n');
   console.log(status);
   if (!config.dryRun) {
