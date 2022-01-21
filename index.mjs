@@ -23,21 +23,21 @@ if (config.partial) {
 }
 
 if (config.solve) {
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
-  const solution = solver.solve(new WordleGame(config.solve[0]));
+  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
+  const solution = solver.solve(new WordleGame(config.solve));
   console.log(solution.toSpoiler());
 }
 
 if (config.solveToday) {
   const puzzle = await getTodaysPuzzle('./wordleWords.bin');
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
+  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(puzzle));
   console.log(solution.toSpoiler());
 }
 
 if (config.tweet) {
   const day = getDayNumber();
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
+  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')));
   const status = [
     `WordleBot ${day} ${solution.length}/6`,
@@ -56,7 +56,7 @@ if (config.tweetEod) {
   const day = getDayNumber();
   const solutions = await tweetedSolutions(day);
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
-  const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')));
+  const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')), undefined, config.startWord);
   const fwSpace = '￣';
   const fwDigits = '０１２３４５６７８９'.split('');
   const gridLine = Array(7).join('⬛').split('');
