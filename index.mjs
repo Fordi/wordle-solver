@@ -1,4 +1,4 @@
-import { getCliOptions, usage } from './lib/cli.mjs';
+import { getCliOptions } from './lib/cli.mjs';
 import { getTodaysPuzzle, getDayNumber } from './lib/getTodaysPuzzle.mjs';
 import { makeResolver, readJson } from './lib/utilities.mjs';
 import WordleSolver from './lib/WordleSolver.mjs';
@@ -29,16 +29,43 @@ if (config.solve) {
 }
 
 if (config.solveToday) {
-  const puzzle = await getTodaysPuzzle('./wordleWords.bin');
+  const puzzle = await getTodaysPuzzle(resolver('./wordleWords.bin'));
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(puzzle));
   console.log(solution.toSpoiler());
 }
 
+if (config.reverse) {
+  const [solution, ...results] = config.reverse;
+  const game = new WordleGame(solution);
+  const wordList = await readJson(resolver('./wordList.json'));
+  const finalGame  = new WordleGame(solution);
+  const solver = new WordleSolver(wordList);
+  const p = results.map(result => wordList.filter(word => {
+    return game.attempt(word).result === result;
+  })).map((words, index) => {
+    const [word] = solver.sort(words).filter(w => {
+      if (finalGame.attempts.find(({ guess }) => guess === w)) return false;
+      if (solver._words.indexOf(w) === -1) return false;
+      return true;
+    });
+    if (!word) {
+      console.log(`Can't reverse solve this`);
+      process.exit(-1);
+    }
+    finalGame.attempt(word);
+    solver.state = solver.state.addAttempt(word, results[index]);
+  });
+  console.log('My best guess at your puzzle');
+  console.log(finalGame.attempts.toSpoiler());
+}
+
+
+
 if (config.tweet) {
   const day = getDayNumber();
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
-  const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')));
+  const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))));
   const status = [
     `WordleBot ${day} ${solution.length}/6`,
     solution.toShareable(),
@@ -56,7 +83,7 @@ if (config.tweetEod) {
   const day = getDayNumber();
   const solutions = await tweetedSolutions(day);
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
-  const solution = solver.solve(new WordleGame(await getTodaysPuzzle('./wordleWords.bin')), undefined, config.startWord);
+  const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))), undefined, config.startWord);
   const fwSpace = '￣';
   const fwDigits = '０１２３４５６７８９'.split('');
   const gridLine = Array(7).join('⬛').split('');
