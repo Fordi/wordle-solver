@@ -1,0 +1,112 @@
+<svg viewBox="0 0 640 112" width="640" height="112" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <style>
+        rect { shape-rendering: crispEdges; }
+        text {
+            dominant-baseline: text-before-edge;
+            white-space: pre;
+            font: 14px monospace;
+            fill: #a6b2c0;
+        }
+        .u { text-decoration: underline; }
+    </style>
+    <svg style="display: none">
+        <rect id="b42" width="8" height="16" stroke-width="1px" stroke="#85cc95" style="fill: #85cc95"/>
+        <rect id="b43" width="8" height="16" stroke-width="1px" stroke="#ffd700" style="fill: #ffd700"/>
+        <rect id="b47" width="8" height="16" stroke-width="1px" stroke="#ffffff" style="fill: #ffffff"/>
+    </svg>
+    <rect width="100%" height="100%" x="0" y="0" style="fill: #1b2738"/>
+    <g transform="translate(16, 0)">
+      <use xlink:href="#b47" x="0" y="32"/>
+      <use xlink:href="#b47" x="8" y="32"/>
+      <use xlink:href="#b47" x="16" y="32"/>
+      <use xlink:href="#b47" x="24" y="32"/>
+      <use xlink:href="#b43" x="32" y="32"/>
+      <use xlink:href="#b43" x="40" y="32"/>
+      <use xlink:href="#b43" x="48" y="32"/>
+      <use xlink:href="#b43" x="56" y="32"/>
+      <use xlink:href="#b47" x="64" y="32"/>
+      <use xlink:href="#b43" x="0" y="48"/>
+      <use xlink:href="#b43" x="8" y="48"/>
+      <use xlink:href="#b42" x="16" y="48"/>
+      <use xlink:href="#b42" x="24" y="48"/>
+      <use xlink:href="#b47" x="32" y="48"/>
+      <use xlink:href="#b47" x="40" y="48"/>
+      <use xlink:href="#b42" x="48" y="48"/>
+      <use xlink:href="#b42" x="56" y="48"/>
+      <use xlink:href="#b47" x="64" y="48"/>
+      <use xlink:href="#b42" x="0" y="64"/>
+      <use xlink:href="#b42" x="8" y="64"/>
+      <use xlink:href="#b42" x="16" y="64"/>
+      <use xlink:href="#b42" x="24" y="64"/>
+      <use xlink:href="#b47" x="32" y="64"/>
+      <use xlink:href="#b47" x="40" y="64"/>
+      <use xlink:href="#b42" x="48" y="64"/>
+      <use xlink:href="#b42" x="56" y="64"/>
+      <use xlink:href="#b42" x="64" y="64"/>
+      <use xlink:href="#b42" x="0" y="80"/>
+      <use xlink:href="#b42" x="8" y="80"/>
+      <use xlink:href="#b42" x="16" y="80"/>
+      <use xlink:href="#b42" x="24" y="80"/>
+      <use xlink:href="#b42" x="32" y="80"/>
+      <use xlink:href="#b42" x="40" y="80"/>
+      <use xlink:href="#b42" x="48" y="80"/>
+      <use xlink:href="#b42" x="56" y="80"/>
+      <use xlink:href="#b42" x="64" y="80"/>
+      <text x="0" y="16">n</text>
+      <text x="8" y="16">o</text>
+      <text x="16" y="16">d</text>
+      <text x="24" y="16">e</text>
+      <text x="40" y="16">i</text>
+      <text x="48" y="16">n</text>
+      <text x="56" y="16">d</text>
+      <text x="64" y="16">e</text>
+      <text x="72" y="16">x</text>
+      <text x="80" y="16">.</text>
+      <text x="88" y="16">m</text>
+      <text x="96" y="16">j</text>
+      <text x="104" y="16">s</text>
+      <text x="120" y="16">-</text>
+      <text x="128" y="16">S</text>
+      <text x="144" y="16">c</text>
+      <text x="152" y="16">i</text>
+      <text x="160" y="16">g</text>
+      <text x="168" y="16">a</text>
+      <text x="176" y="16">r</text>
+      <text x="0" y="32" style="fill: #011627" class="u">s</text>
+      <text x="8" y="32" style="fill: #011627" class="u">|</text>
+      <text x="16" y="32" style="fill: #011627" class="u">o</text>
+      <text x="24" y="32" style="fill: #011627" class="u">|</text>
+      <text x="32" y="32" style="fill: #011627" class="u">a</text>
+      <text x="40" y="32" style="fill: #011627" class="u">|</text>
+      <text x="48" y="32" style="fill: #011627" class="u">r</text>
+      <text x="56" y="32" style="fill: #011627" class="u">|</text>
+      <text x="64" y="32" style="fill: #011627" class="u">e</text>
+      <text x="0" y="48" style="fill: #011627" class="u">r</text>
+      <text x="8" y="48" style="fill: #011627" class="u">|</text>
+      <text x="16" y="48" style="fill: #011627" class="u">i</text>
+      <text x="24" y="48" style="fill: #011627" class="u">|</text>
+      <text x="32" y="48" style="fill: #011627" class="u">y</text>
+      <text x="40" y="48" style="fill: #011627" class="u">|</text>
+      <text x="48" y="48" style="fill: #011627" class="u">a</text>
+      <text x="56" y="48" style="fill: #011627" class="u">|</text>
+      <text x="64" y="48" style="fill: #011627" class="u">l</text>
+      <text x="0" y="64" style="fill: #011627" class="u">c</text>
+      <text x="8" y="64" style="fill: #011627" class="u">|</text>
+      <text x="16" y="64" style="fill: #011627" class="u">i</text>
+      <text x="24" y="64" style="fill: #011627" class="u">|</text>
+      <text x="32" y="64" style="fill: #011627" class="u">m</text>
+      <text x="40" y="64" style="fill: #011627" class="u">|</text>
+      <text x="48" y="64" style="fill: #011627" class="u">a</text>
+      <text x="56" y="64" style="fill: #011627" class="u">|</text>
+      <text x="64" y="64" style="fill: #011627" class="u">r</text>
+      <text x="0" y="80" style="fill: #011627" class="u">c</text>
+      <text x="8" y="80" style="fill: #011627" class="u">|</text>
+      <text x="16" y="80" style="fill: #011627" class="u">i</text>
+      <text x="24" y="80" style="fill: #011627" class="u">|</text>
+      <text x="32" y="80" style="fill: #011627" class="u">g</text>
+      <text x="40" y="80" style="fill: #011627" class="u">|</text>
+      <text x="48" y="80" style="fill: #011627" class="u">a</text>
+      <text x="56" y="80" style="fill: #011627" class="u">|</text>
+      <text x="64" y="80" style="fill: #011627" class="u">r</text>
+    </g>
+</svg>

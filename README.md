@@ -4,9 +4,33 @@ A solver for Wordle, written in NodeJS using modules and classes and other fancy
 
 ## How to use it
 
-Run `npm ci` before trying to use it.  Ideally, have [`nvm`](https://github.com/nvm-sh/nvm#install--update-script) installed and run `nvm use` before doing that.
+### Setup
 
-Set up the `twitter.json` file before trying to tweet with it.
+#### Linux / OS-X:
+
+* Clone the repo or download the sources as a zip file:
+    * `git clone https://github.com/Fordi/wordle-solver.git; cd wordle-solver`
+    * or
+    ```
+    wget https://github.com/Fordi/wordle-solver/archive/refs/heads/main.zip
+    unzip main.zip -d wordle-solver
+    rm main.zip
+    ```
+* [Install NVM](https://github.com/nvm-sh/nvm#install--update-script)
+* Run `nvm install`
+* Run `npm ci`
+
+#### Windows
+
+* Install [NVS](https://github.com/jasongin/nvs/releases)
+* Install [Git](https://git-scm.com/download/win)
+* Clone the repo:
+    * `git clone https://github.com/Fordi/wordle-solver.git; cd wordle-solver`
+* Run `npm ci`
+
+If you plan on using the twitter functions (seriously, why?), set up the `twitter.json` file.
+
+### Usage
 
 ```
 Usage: node index.mjs ...
@@ -18,6 +42,21 @@ Usage: node index.mjs ...
     -d|--dryRun      Do everything, but don't send the tweet
 ```
 
+#### -s|--solveToday
+
+Solve today's puzzle (spoiler output), e.g.,
+
+![solveToday](./assets/solveToday.svg)
+
+#### -p|--partial ...
+
+Find the next 10 word candidates given a history, e.g.,
+
+```bash
+node index.mjs -p weary--?-+ pills+?--- vague-+---
+patin panic paint panim panni campi patio capiz qapik happi
+```
+
 Partial states represent a guess and its results, e.g., `weary--?-+` means:
 
 * You tried "weary"
@@ -25,15 +64,71 @@ Partial states represent a guess and its results, e.g., `weary--?-+` means:
 * The "y" is right where it needs to be
 * "w", "e" and "r" are absent
 
+
+#### -S|--solve arg
+
+Solve an arbitrary puzzle (spoiler output), e.g.,
+
+![--solve][./assets/solve.svg]
+
+(real output uses console bg colors to show what's a match)
+
+#### -r|--reverse ...
+
+Solve in reverse, starting with a known solution and a list of statuses, e.g.,
+```bash 
+node index.mjs -r cigar ???-- +?--+ ++-++ +++++
+```
+
+#### -d|--dryRun
+
+For use with `--tweet` and `--tweetEod`.  Do everything, but don't send the tweet.  It's assumed if `twitter.json` is not set up.
+
+#### -t|--tweet
+
+Solve today's puzzle and tweet about it (share-safe output), e.g.,
+
+```bash
+node index.mjs -d -t
+WordleBot 1 4/6
+⬛⬛⬛🟨🟨
+🟨🟨⬛🟨⬛
+🟩🟩🟨⬛⬛
+🟩🟩🟩🟩🟩
+(WordleBot is a DIY Wordle solver I wrote in NodeJS. If you beat the bot, you're doing great!)
+```
+
+#### -e|--tweetEod
+
+Tweet WordleBot's EOD message (requires twitter API config), e.g.,
+
+```bash
+node index.mjs -d -e
+Stats for the last 100 tweets for Wordle 221:
+３４⬛⬛🟩🟨⬛⬛
+１９⬛⬛🟩🟩🟨🟨
+１１⬛⬛🟩🟩🟩🟩
+￣６⬛⬛🟩🟩🟩🟩
+￣４⬛🟩🟩🟩🟩🟩
+￣１⬛🟩🟩🟩🟩🟩
+￣￣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣
+WordleBot solved it in 3
+If you beat the bot, you're doing great!
+```
+
+Until Twitter is configured, `--dryRun` is assumed for `--tweet`, and `--tweetEod` won't work.
+
+Please be aware that `--solveToday` and `--solve` will output the bot's full solution, not just the share-safe version.
+
 ## How it works
 
 In this repository, there's a `wordList.json` that contains every word that Wordle considers valid.  Most of these are not solutions.
 
-The bot is, at the highest level, a bare-bones clone of the game, and a solver.
+The bot is, at the highest level, a bare-bones clone of the game, and a solver for that game.
 
 The game is simple - it knows the answer and, if you guess, it will tell you how wrong you are.  Just like the real thing.
 
-The solver reads the full list, and makes a frequency table containing letter-position tuples (e.g., { 'a:0': 52 }, meaning 'a' is in the first position in 52 words).  It then sorts its word list by the words' "scores" - which are just a sum of the frequency of each letter/position.  The first item in the list should be the "best" guess.
+The solver reads the full word list, and makes a frequency table of the letters. It then sorts its word list by the words' "scores" - which are just a sum of the frequency of each letter.  The first item in the list is then the "best" guess.
 
 After each guess, the solver filters the word list, rebuilds the frequency table and re-sorts what's left.
 
@@ -50,7 +145,7 @@ You'll need your Twitter API keys to use the tweet features of this bot.
 5. (Revoke) the Bearer Token; you won't be needing one.
 5. Under "Access Token and Secret", generate the `accessToken` and `accessTokenSecret`, and put those into `twitter.json`.
 
-## How'd you do the encoding?
+## How'd you encode the solutions list?
 
 Not telling.  If you're smart, you can parse through `lib/getTodaysPuzzle.mjs` and work it out.  If you're the author of Wordle and want to use something like this to hide the words, let me know and I'll share source.
 
@@ -63,4 +158,3 @@ No, you can't have those.
 ## Hey!  I ran it for day X, and it output something different than what it tweeted!
 
 Yeah.  I've been futzing with it since the first tweet.  What about it?
-Wordle 210 5/6
