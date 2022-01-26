@@ -36,7 +36,8 @@ If you plan on using the twitter functions (seriously, why?), set up the `twitte
 Usage: node index.mjs ...
     -s|--solveToday  Solve today's puzzle
     -t|--tweet       Solve today's puzzle and tweet about it
-    -p|--partial ... Find the next 10 word candidates given a history, e.g., -p weary--?-- pills+?--- vague-+---
+    -p|--partial ... Find the next 10 word candidates given a history, e.g., 
+-p weary--?-- pills+?--- vague-+---
     -S|--solve arg   Solve an arbitrary puzzle, e.g., -S cigar
     -e|--tweetEod    Tweet WordleBot's EOD message
     -d|--dryRun      Do everything, but don't send the tweet
@@ -95,7 +96,8 @@ WordleBot 1 4/6
 🟨🟨⬛🟨⬛
 🟩🟩🟨⬛⬛
 🟩🟩🟩🟩🟩
-(WordleBot is a DIY Wordle solver I wrote in NodeJS. If you beat the bot, you're doing great!)
+(WordleBot is a DIY Wordle solver I wrote in NodeJS. If you beat the bot,
+you're doing great!)
 ```
 
 #### -e|--tweetEod
