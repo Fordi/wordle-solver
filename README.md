@@ -72,8 +72,6 @@ Solve an arbitrary puzzle (spoiler output), e.g.,
 
 ![solve](./assets/solve.svg)
 
-(real output uses console bg colors to show what's a match)
-
 #### -r|--reverse ...
 
 Solve in reverse, starting with a known solution and a list of statuses, e.g.,
