@@ -52,7 +52,7 @@ Solve today's puzzle (spoiler output), e.g.,
 
 Find the next 10 word candidates given a history, e.g.,
 
-```bash
+```
 node index.mjs -p weary--?-+ pills+?--- vague-+---
 patin panic paint panim panni campi patio capiz qapik happi
 ```
@@ -76,7 +76,7 @@ Solve an arbitrary puzzle (spoiler output), e.g.,
 #### -r|--reverse ...
 
 Solve in reverse, starting with a known solution and a list of statuses, e.g.,
-```bash 
+```
 node index.mjs -r cigar ???-- +?--+ ++-++ +++++
 ```
 
@@ -88,7 +88,7 @@ For use with `--tweet` and `--tweetEod`.  Do everything, but don't send the twee
 
 Solve today's puzzle and tweet about it (share-safe output), e.g.,
 
-```bash
+```
 node index.mjs -d -t
 WordleBot 1 4/6
 ⬛⬛⬛🟨🟨
@@ -102,7 +102,7 @@ WordleBot 1 4/6
 
 Tweet WordleBot's EOD message (requires twitter API config), e.g.,
 
-```bash
+```
 node index.mjs -d -e
 Stats for the last 100 tweets for Wordle 221:
 ３４⬛⬛🟩🟨⬛⬛
