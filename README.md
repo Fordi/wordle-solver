@@ -70,7 +70,7 @@ Partial states represent a guess and its results, e.g., `weary--?-+` means:
 
 Solve an arbitrary puzzle (spoiler output), e.g.,
 
-![--solve][./assets/solve.svg]
+![solve](./assets/solve.svg)
 
 (real output uses console bg colors to show what's a match)
 
