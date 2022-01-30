@@ -86,35 +86,42 @@ if (config.tweetEod) {
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))), undefined, config.startWord);
   const fwSpace = '￣';
   const fwDigits = '０１２３４５６７８９'.split('');
-  const gridLine = Array(7).join('⬛').split('');
+  const gridLine = Array(8).join('⬛').split('');
   const grid = Array(6).join('.').split('.').map(() => gridLine.slice());
-  const max = solutions.reduce((max, { count }) => Math.max(max, count), 0);
-  const counts = Array(6).join('.').split('.').map((_, i) => {
-    const n = i === 0 ? 1 : Math.ceil((max**(1/6))**(i + 1));
+  const order = [1, 2, 3, 4, 5, 6, 0];
+  const max = order.reduce((max, index) => {
+    const { pct = 0 } = solutions[index] || {};
+    return Math.max(max, Math.ceil(pct));
+  }, 0);
+  const counts = order.map((_, i) => {
+    const n = Math.ceil((max**(1/6))**(i));
     const t = Math.floor(n / 10);
-    const o = n % 10;
+    const o = (n | 0) % 10;
     return (t === 0 ? fwSpace : fwDigits[t]) + fwDigits[o];
   }).reverse();
-  solutions.forEach(({ count, steps }) => {
-    const x = steps - 1;
+  
+  order.forEach((index) => {
+    let { pct, steps } = solutions[index] || {};
+    pct = Math.ceil(pct);
+    const x = steps;
     for (let y = 0; y < 6; y++) {
       const i = 5 - y;
       const b = i === 0 ? 0 : i === 1 ? 1 : Math.ceil((max**(1/6))**(i));
       const t = i === 0 ? 1 : Math.ceil((max**(1/6))**(i + 1));
-      if (count >= t) {
+      if (pct >= t) {
         grid[y][x] = '🟩';
-      } else if (count > b) {
+      } else if (pct > b) {
         grid[y][x] = '🟨';
       }
     }
   });
 
   const status = [
-    `Stats for the last 100 tweets for Wordle ${day}:`,
+    `Stats for ${solutions.sourceLength} tweets for Wordle ${day}:`,
     ...grid.map((line, n) => (
      counts[n] + line.join('')
     )),
-    '￣￣' + `1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣`,
+    '￣％' + `1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣🟥`,
     `WordleBot solved it in ${solution.length}`,
     `If you beat the bot, you're doing great!`
   ].join('\n');
