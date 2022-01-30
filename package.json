@@ -5,6 +5,7 @@
   "author": "Bryan Elliott <fordiman@gmail.com>",
   "description": "A Wordle Solver in NodeJS",
   "dependencies": {
+    "node-base91": "^0.3.4",
     "twitter-api-client": "^1.5.1"
   }
 }

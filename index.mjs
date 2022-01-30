@@ -125,3 +125,9 @@ if (config.tweetEod) {
     console.log('Sent!');
   }
 }
+
+if (config.logStats) {
+  const day = getDayNumber();
+  const solutions = await tweetedSolutions(day);
+  console.log(`Day info has ${solutions.sourceLength} solutions`);
+}
