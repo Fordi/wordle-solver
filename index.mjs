@@ -7,7 +7,7 @@ import { sendTweet, tweetedSolutions } from './lib/Twitter.mjs';
 
 const resolver = makeResolver(import.meta);
 
-const WORDLE_POSTSCRIPT = `(WordleBot is a DIY Wordle solver I wrote in NodeJS.  If you beat the bot, you're doing great!)`;
+const WORDLE_POSTSCRIPT = `(wordle-solver is a DIY Wordle solver I wrote in NodeJS.  If you beat the bot, you're doing great!)`;
 
 const config = getCliOptions();
 
@@ -67,7 +67,7 @@ if (config.tweet) {
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))));
   const status = [
-    `WordleBot ${day} ${solution.length}/6`,
+    `wordle-solver ${day} ${solution.length}/6`,
     solution.toShareable(),
     WORDLE_POSTSCRIPT
   ].join('\n');
@@ -122,7 +122,7 @@ if (config.tweetEod) {
      counts[n] + line.join('')
     )),
     '￣％' + `1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣🟥`,
-    `WordleBot solved it in ${solution.length}`,
+    `wordle-solver solved it in ${solution.length}`,
     `If you beat the bot, you're doing great!`
   ].join('\n');
   console.log(status);
