@@ -1,4 +1,4 @@
-# WordleBot
+# wordle-solver
 
 A solver for Wordle, written in NodeJS using modules and classes and other fancy stuff.
 
