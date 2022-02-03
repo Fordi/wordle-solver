@@ -11,6 +11,10 @@ const WORDLE_POSTSCRIPT = `(wordle-solver is a DIY Wordle solver I wrote in Node
 
 const config = getCliOptions();
 
+if (config.dayNum) {
+  console.log(`It is day ${getDayNumber()}`);
+}
+
 if (config.partial) {
   const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
   config.partial.forEach(attempt => {
