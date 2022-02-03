@@ -34,13 +34,16 @@ If you plan on using the twitter functions (seriously, why?), set up the `twitte
 
 ```
 Usage: node index.mjs ...
+
     -s|--solveToday  Solve today's puzzle
-    -t|--tweet       Solve today's puzzle and tweet about it
-    -p|--partial ... Find the next 10 word candidates given a history, e.g., 
--p weary--?-- pills+?--- vague-+---
+    -p|--partial ... Find the next 10 word candidates given a history, e.g., -p weary--?-- pills+?--- vague-+---
     -S|--solve arg   Solve an arbitrary puzzle, e.g., -S cigar
-    -e|--tweetEod    Tweet WordleBot's EOD message
+    -r|--reverse ... Solve in reverse, starting with a word and a list of statuses, e.g., -r cigar ???-- +?--+ ++-++ +++++
     -d|--dryRun      Do everything, but don't send the tweet
+    -t|--tweet       Solve today's puzzle and tweet about it
+    -e|--tweetEod    Tweet wordle-solver's EOD message
+    -l|--logStats    Log statistics from twitter
+    -D|--dayNum      Report the day number
 ```
 
 #### -s|--solveToday
@@ -89,36 +92,44 @@ Solve today's puzzle and tweet about it (share-safe output), e.g.,
 
 ```
 node index.mjs -d -t
-WordleBot 1 4/6
+wordle-solver 1 4/6
 ⬛⬛⬛🟨🟨
 🟨🟨⬛🟨⬛
 🟩🟩🟨⬛⬛
 🟩🟩🟩🟩🟩
-(WordleBot is a DIY Wordle solver I wrote in NodeJS. If you beat the bot,
+(wordle-wolver is a DIY Wordle solver I wrote in NodeJS. If you beat the bot,
 you're doing great!)
 ```
 
 #### -e|--tweetEod
 
-Tweet WordleBot's EOD message (requires twitter API config), e.g.,
+Tweet wordle-solvers's EOD message (requires twitter API config), e.g.,
 
 ```
 node index.mjs -d -e
-Stats for the last 100 tweets for Wordle 221:
-３４⬛⬛🟩🟨⬛⬛
-１９⬛⬛🟩🟩🟨🟨
-１１⬛⬛🟩🟩🟩🟩
-￣６⬛⬛🟩🟩🟩🟩
-￣４⬛🟩🟩🟩🟩🟩
-￣１⬛🟩🟩🟩🟩🟩
-￣￣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣
-WordleBot solved it in 3
+Stats for 12599 tweets for Wordle 229:
+３５⬛⬛⬛🟨🟩🟨⬛
+２０⬛⬛⬛🟩🟩🟩⬛
+１１⬛⬛⬛🟩🟩🟩🟨
+￣６⬛⬛⬛🟩🟩🟩🟩
+￣４⬛🟨🟨🟩🟩🟩🟩
+￣２⬛🟩🟩🟩🟩🟩🟩
+￣％1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣🟥
+wordle-solver solved it in 6
 If you beat the bot, you're doing great!
 ```
 
 Until Twitter is configured, `--dryRun` is assumed for `--tweet`, and `--tweetEod` won't work.
 
 Please be aware that `--solveToday` and `--solve` will output the bot's full solution, not just the share-safe version.
+
+#### -l|--logStats
+
+Search for `Wordle ${day} 🟩` on twitter, and add a hash of each tweet ID (for deduplication) and its win count in `./stats/${day}.json`.
+
+#### -d|--dayNum
+
+Print the day number.  On Feb 1, the day number was coming up wrong, and I needed a way to check what wordle-solver thought the day was.
 
 ## How it works
 
