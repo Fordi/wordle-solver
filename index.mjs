@@ -23,7 +23,7 @@ if (config.partial) {
     }
     solver.state = solver.state.addAttempt(attempt.substring(0, 5), attempt.substring(5, 10));
   });
-  console.log(solver.nextWords(10).join(' '));
+  console.log(`${solver._words.length}: ${solver.nextWords(10).join(' ')}`);
 }
 
 if (config.solve) {
