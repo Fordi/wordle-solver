@@ -133,7 +133,7 @@ Print the day number.  On Feb 1, the day number was coming up wrong, and I neede
 
 ## How it works
 
-In this repository, there's a `wordList.json` that contains every word that Wordle considers valid.  Most of these are not solutions.
+In this repository, there's a `freq_map.json` that contains every word that Wordle considers valid, and assigns a frequency to them (based on Wolfram Alpha's WordFrequencyData).  Most of these are not solutions.
 
 The bot is, at the highest level, a bare-bones clone of the game, and a solver for that game.
 

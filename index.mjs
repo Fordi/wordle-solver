@@ -15,8 +15,10 @@ if (config.dayNum) {
   console.log(`It is day ${getDayNumber()}`);
 }
 
+const getWords = async () => Object.keys(await readJson(resolver('./freq_map.json')));
+
 if (config.partial) {
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
+  const solver = new WordleSolver(await getWords());
   config.partial.forEach(attempt => {
     if (!/[a-z]{5}[\?\-\+]{5}/.test(attempt)) {
       throw new Error('Attempts must be in the format abcde-?+?-');
@@ -27,14 +29,14 @@ if (config.partial) {
 }
 
 if (config.solve) {
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
+  const solver = new WordleSolver(await getWords(), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(config.solve));
   console.log(solution.toSpoiler());
 }
 
 if (config.solveToday) {
   const puzzle = await getTodaysPuzzle(resolver('./wordleWords.bin'));
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
+  const solver = new WordleSolver(await getWords(), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(puzzle));
   console.log(solution.toSpoiler());
 }
@@ -42,7 +44,7 @@ if (config.solveToday) {
 if (config.reverse) {
   const [solution, ...results] = config.reverse;
   const game = new WordleGame(solution);
-  const wordList = await readJson(resolver('./wordList.json'));
+  const wordList = await getWords();
   const finalGame  = new WordleGame(solution);
   const solver = new WordleSolver(wordList);
   const p = results.map(result => wordList.filter(word => {
@@ -68,7 +70,7 @@ if (config.reverse) {
 
 if (config.tweet) {
   const day = getDayNumber();
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')), undefined, config.startWord);
+  const solver = new WordleSolver(await getWords(), undefined, config.startWord);
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))));
   const status = [
     `wordle-solver ${day} ${solution.length}/6`,
@@ -86,7 +88,7 @@ if (config.tweet) {
 if (config.tweetEod) {
   const day = getDayNumber();
   const solutions = await tweetedSolutions(day);
-  const solver = new WordleSolver(await readJson(resolver('./wordList.json')));
+  const solver = new WordleSolver(await getWords());
   const solution = solver.solve(new WordleGame(await getTodaysPuzzle(resolver('./wordleWords.bin'))), undefined, config.startWord);
   const fwSpace = '￣';
   const fwDigits = '０１２３４５６７８９'.split('');
