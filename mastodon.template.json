@@ -1,0 +1,8 @@
+[
+  {
+    "accessToken": "ACCESS-TOKEN",
+    "clientSecret": "CLIENT-SECRET",
+    "clientKey": "CLIENT-KEY",
+    "apiUrl": "SERVER-HOST"
+  }
+]

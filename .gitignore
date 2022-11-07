@@ -1,5 +1,6 @@
 private/
 stats/
 twitter.json
+mastodon.json
 node_modules
 .DS_Store

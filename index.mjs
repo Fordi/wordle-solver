@@ -4,6 +4,7 @@ import { makeResolver, readJson } from './lib/utilities.mjs';
 import WordleSolver from './lib/WordleSolver.mjs';
 import WordleGame from './lib/WordleGame.mjs';
 import { sendTweet, tweetedSolutions } from './lib/Twitter.mjs';
+import { sendToot, tootedSolutions } from './lib/Mastodon.mjs';
 
 const resolver = makeResolver(import.meta);
 
@@ -79,9 +80,16 @@ if (config.tweet) {
   ].join('\n');
   console.log(status);
   if (!config.dryRun) {
-    console.log('Sending tweet...')
-    await sendTweet(status);
-    console.log('Sent!');
+    if (config.twitter) {
+      console.log('Sending tweet...');
+      await sendTweet(status);
+      console.log('Sent!');
+    }
+    if (config.mastodon) {
+      console.log('Sending toot...');
+      await sendToot(status);
+      console.log('Sent!');
+    }
   }
 }
 
